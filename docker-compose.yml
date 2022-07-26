@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  db:
+    image: mariadb:latest
+    volumes:
+    - db:/var/lib/mysql
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.8"
+          memory: 800M
+    environment:
+      MYSQL_ROOT_PASSWORD: glpi
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_DATABASE: glpi
+      MYSQL_USER: glpi
+      MYSQL_PASSWORD: glpi
+    ports:
+    - "3306:3306"
+    networks:
+    - glpi
+  php:
+    depends_on:
+    - db
+    image: dramos777/php-to-glpi:1.0
+    volumes:
+    - ./glpi-project:/var/www/html/
+    ports:
+    - "9000:9000"
+    networks:
+    - glpi
+  web:
+    depends_on:
+    - db
+    - php
+    image: dramos777/nginx-basic-conf-to-php:1.0 
+    volumes:
+    - ./glpi-project:/var/www/html/
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.8"
+    ports:
+    - "80:80"
+    - "443:443" 
+    networks:
+    - glpi
+networks:
+  glpi:
+volumes:
+  db:
