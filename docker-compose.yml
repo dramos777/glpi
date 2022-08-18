@@ -23,16 +23,21 @@ services:
     - db
     image: dramos777/php-to-glpi:1.0
     volumes:
-    - ./glpi-project:/var/www/html/
+    - ./glpi-project:/var/www/html/glpi/
     networks:
     - network
   web:
     depends_on:
     - db
     - php
-    image: dramos777/nginx-basic-conf-to-php:1.0 
+    image: nginx:alpine 
     volumes:
-    - ./glpi-project:/var/www/html/
+    - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    - ./glpi-project:/var/www/html/glpi/:ro
+    - ./glpi-project/config/:/var/www/html/glpi/config/:rw
+    - ./glpi-project/plugins/:/var/www/html/glpi/plugins/:rw
+    - ./certificates/fullchain.pem:/etc/nginx/ssl/live/techare.io/fullchain.pem:ro
+    - ./certificates/privkey.pem:/etc/nginx/ssl/live/techare.io/privkey.pem:ro
     deploy:
       replicas: 1
       resources:
