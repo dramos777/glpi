@@ -36,8 +36,8 @@ services:
     - ./glpi-project:/var/www/html/glpi/:ro
     - ./glpi-project/config/:/var/www/html/glpi/config/:rw
     - ./glpi-project/plugins/:/var/www/html/glpi/plugins/:rw
-    - ./certificates/fullchain.pem:/etc/nginx/ssl/live/techare.io/fullchain.pem:ro
-    - ./certificates/privkey.pem:/etc/nginx/ssl/live/techare.io/privkey.pem:ro
+    - ./certificates/fullchain.pem:/etc/nginx/ssl/live/example.org/fullchain.pem:ro
+    - ./certificates/privkey.pem:/etc/nginx/ssl/live/example.org/privkey.pem:ro
     deploy:
       replicas: 1
       resources:
