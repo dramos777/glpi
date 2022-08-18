@@ -24690,9 +24690,12 @@ body .modal-content, body .modal-header {
 .page-anonymous .glpi-logo {
   --logo: url(../pics/logos/logo-GLPI-250-white.png) !important;
 }
-.qtip-bootstrap {
+.qtip-bootstrap, .popover .popover-body {
   background-color: #292828 !important;
   color: var(--light) !important;
+}
+.popover .popover-arrow::after {
+  border-top-color: #292828 !important;
 }
 .toast {
   background-color: #313030;
@@ -24898,9 +24901,12 @@ table.deleted-results > :not(caption) > * > * {
   top: 0 !important;
   bottom: 0 !important;
 }
-.qtip-bootstrap {
+.qtip-bootstrap, .popover .popover-body {
   background-color: #aaa;
   color: #242323;
+}
+.popover .popover-arrow::after {
+  border-top-color: #aaa;
 }
 kbd {
   white-space: nowrap;
@@ -26770,6 +26776,7 @@ body .flatpickr-time input:hover, body .flatpickr-time .flatpickr-am-pm:hover, b
   height: calc(100% - (1.2em + 35px));
   overflow-y: auto;
   overflow-x: hidden;
+  list-style: none;
 }
 .kanban .kanban-container .kanban-columns .kanban-column .kanban-body .kanban-add-form {
   padding-top: 10px !important;

@@ -209,7 +209,9 @@
                            'full_width': true,
                            'icon_label': true,
                            'entity': item.fields['entities_id'],
-                           'is_active': 1,
+                           'condition': {
+                              'is_active': 1,
+                           },
                            'rand': rand,
                         }
                      ) }}
@@ -338,7 +340,10 @@
                               rand_user: {{ random() }},
                               rand_group: {{ random() }},
                               itemtype: "{{ subitem.type }}",
-                              items_id: {{ subitem.fields['id']|default(-1) }}
+                              items_id: {{ subitem.fields['id']|default(-1) }},
+                              parent_itemtype: "{{ item.type }}",
+                              parent_items_id: {{ item.fields['id'] }},
+                              parent_fk_field: "{{ item.getForeignKeyField() }}",
                            });
                         }
                      </script>

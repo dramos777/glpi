@@ -36,7 +36,7 @@
 use Glpi\SocketModel;
 
 // Current version of GLPI
-define('GLPI_VERSION', '10.0.1');
+define('GLPI_VERSION', '10.0.2');
 $schema_file = sprintf('%s/install/mysql/glpi-%s-empty.sql', GLPI_ROOT, GLPI_VERSION);
 define(
     "GLPI_SCHEMA_VERSION",
@@ -184,7 +184,7 @@ $LANG             = [];
 $CFG_GLPI["unicity_types"]                = ['Budget', 'Computer', 'Contact', 'Contract',
     'Infocom', 'Monitor', 'NetworkEquipment',
     'Peripheral', 'Phone', 'Printer', 'Software',
-    'SoftwareLicense', 'Supplier','User', 'Certicate',
+    'SoftwareLicense', 'Supplier','User', 'Certificate',
     'Rack', 'Enclosure', 'PDU', 'Cluster', 'Item_DeviceSimcard'
 ];
 
@@ -592,7 +592,13 @@ $CFG_GLPI['javascript'] = [
     ],
     'admin'        => ['clipboard', 'sortable'],
     'preference'   => ['clipboard'],
-    'self-service' => array_merge(['tinymce'], $reservations_libs)
+    'self-service' => array_merge(['tinymce'], $reservations_libs),
+    'tickets'      => [
+        'ticket' => ['tinymce']
+    ],
+    'create_ticket' => ['tinymce'],
+    'reservation'   => array_merge(['tinymce'], $reservations_libs),
+    'faq'           => ['tinymce'],
 ];
 
 // push reservations libs to reservations itemtypes (they shoul in asset sector)

@@ -2606,7 +2606,7 @@ HTML;
         echo "</td></tr>";
 
         $admnumrand = mt_rand();
-        echo "<tr class='tab_bg_1'><td><label for='textfield_registration_number$admnumrand'>" . __('Administrative number') . "</label></td><td>";
+        echo "<tr class='tab_bg_1'><td><label for='textfield_registration_number$admnumrand'>" . _x('user', 'Administrative number') . "</label></td><td>";
         echo Html::input(
             'registration_number',
             [
@@ -3096,7 +3096,7 @@ HTML;
             echo "</td></tr>";
 
             $admnumrand = mt_rand();
-            echo "<tr class='tab_bg_1'><td><label for='textfield_registration_number$admnumrand'>" . __('Administrative number') . "</label></td><td>";
+            echo "<tr class='tab_bg_1'><td><label for='textfield_registration_number$admnumrand'>" . _x('user', 'Administrative number') . "</label></td><td>";
             if (
                 $extauth
                 && isset($authtype['registration_number_field']) && !empty($authtype['registration_number_field'])
@@ -3662,7 +3662,7 @@ HTML;
             'id'                 => '22',
             'table'              => $this->getTable(),
             'field'              => 'registration_number',
-            'name'               => __('Administrative number'),
+            'name'               => _x('user', 'Administrative number'),
             'datatype'           => 'string',
         ];
 
@@ -5035,11 +5035,6 @@ HTML;
         ];
         $myuser = new self();
         $myuser->getFromDB($users_id);
-
-       //User is already considered as delete from ldap
-        if ($myuser->fields['is_deleted_ldap'] == 1) {
-            return;
-        }
 
         switch ($CFG_GLPI['user_deleted_ldap']) {
            //DO nothing

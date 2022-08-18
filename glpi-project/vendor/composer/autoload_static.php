@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9e499a5a9294ffaf9a0a1cea0c0f24aa
+class ComposerStaticInit3b80b70befb55cb42e9ff2d00b8ee135
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -494,6 +494,7 @@ class ComposerStaticInit9e499a5a9294ffaf9a0a1cea0c0f24aa
         'Glpi\\Console\\Migration\\DatabasesPluginToCoreCommand' => __DIR__ . '/../..' . '/src/Console/Migration/DatabasesPluginToCoreCommand.php',
         'Glpi\\Console\\Migration\\DomainsPluginToCoreCommand' => __DIR__ . '/../..' . '/src/Console/Migration/DomainsPluginToCoreCommand.php',
         'Glpi\\Console\\Migration\\DynamicRowFormatCommand' => __DIR__ . '/../..' . '/src/Console/Migration/DynamicRowFormatCommand.php',
+        'Glpi\\Console\\Migration\\MigrateAllCommand' => __DIR__ . '/../..' . '/src/Console/Migration/MigrateAllCommand.php',
         'Glpi\\Console\\Migration\\MyIsamToInnoDbCommand' => __DIR__ . '/../..' . '/src/Console/Migration/MyIsamToInnoDbCommand.php',
         'Glpi\\Console\\Migration\\RacksPluginToCoreCommand' => __DIR__ . '/../..' . '/src/Console/Migration/RacksPluginToCoreCommand.php',
         'Glpi\\Console\\Migration\\TimestampsCommand' => __DIR__ . '/../..' . '/src/Console/Migration/TimestampsCommand.php',
@@ -742,6 +743,7 @@ class ComposerStaticInit9e499a5a9294ffaf9a0a1cea0c0f24aa
         'GuzzleHttp\\Psr7\\StreamWrapper' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/StreamWrapper.php',
         'GuzzleHttp\\Psr7\\UploadedFile' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UploadedFile.php',
         'GuzzleHttp\\Psr7\\Uri' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Uri.php',
+        'GuzzleHttp\\Psr7\\UriComparator' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriComparator.php',
         'GuzzleHttp\\Psr7\\UriNormalizer' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriNormalizer.php',
         'GuzzleHttp\\Psr7\\UriResolver' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriResolver.php',
         'GuzzleHttp\\Psr7\\Utils' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Utils.php',
@@ -2496,10 +2498,10 @@ class ComposerStaticInit9e499a5a9294ffaf9a0a1cea0c0f24aa
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9e499a5a9294ffaf9a0a1cea0c0f24aa::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9e499a5a9294ffaf9a0a1cea0c0f24aa::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit9e499a5a9294ffaf9a0a1cea0c0f24aa::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit9e499a5a9294ffaf9a0a1cea0c0f24aa::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3b80b70befb55cb42e9ff2d00b8ee135::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3b80b70befb55cb42e9ff2d00b8ee135::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit3b80b70befb55cb42e9ff2d00b8ee135::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit3b80b70befb55cb42e9ff2d00b8ee135::$classMap;
 
         }, null, ClassLoader::class);
     }
