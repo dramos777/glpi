@@ -79,6 +79,6 @@ class __TwigTemplate_4c7bd1fa659af81fa8e42b28e180f534 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "install/choose_language.html.twig", "/var/www/html/templates/install/choose_language.html.twig");
+        return new Source("", "install/choose_language.html.twig", "/var/www/html/glpi/templates/install/choose_language.html.twig");
     }
 }

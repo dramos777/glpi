@@ -4,27 +4,58 @@
 
 ### Resumo
 
-Personalização dos containers docker nginx:alpine e php:fpm-alpine com configurações e requisitos básicos necessários para o deploy da GLPI-v10.x com banco de dados mariadb/mysql.
+- Personalização das configurações do nginx para redirecionar páginas http para https.
+- Alteração do container php:fpm-alpine com instalação e configuração dos pacotes básicos necessários para o deploy da GLPI-v10.x com banco de dados mariadb/mysql.
 
 ### Dependências
 
 - GNU Linux com Docker instalado
 
-### Forma de usar
+### Testado em:
+- GNU/Linux Debian 11 com Docker 20.10.5+dfsg1 (swarm)
+- GNU/Linux Debian 11 com Docker 20.10.17 (swarm)
 
-Clone do repositório e deploy da app:
+### Antes de iniciar
+
+- O diretório *glpi-project* contém o conteúdo do projeto GLPI baixado no site oficial *(https://glpi-project.org)*.
+- Altere o *usuario/grupo* dono do diretório para o *usuário/grupo* do container **php:fpm-alpine** *(www-data:www-data uid=82 gui=82)*.
+- Para testes utilizando outras versões do GLPI substitua o conteúdo da pasta *glpi-project* com os arquivos da versão do GLPI desejada.
+- Altere *seudominio.abc,www.seudominio.abc e www2.seudominio.abc* no arquivo de configuração do nginx (*./nginx/defaul.conf*).
+
+### Como usar
+
+Caso não tenha o Docker instalado:
+
+```
+curl -fsSL https://get.docker.com | bash
+
+```
+Inicialização do cluster swarm:
+
+```
+docker swarm init
+
+```
+
+Clone do repositório:
 
 ```
 git clone https://github.com/dramos777/glpi.git
 cd glpi
+
+```
+Criação do certificado:
+
+```
+openssl req -newkey rsa:2048 -nodes -keyout ./certificates/privkey.pem -x509 -days 365 -out ./certificates/fullchain.pem
+
+```
+Deploy da APP:
+
+```
 docker stack deploy -c docker-compose.yml glpi
 
 ```
-OBS.: O diretório glpi-project contém o conteúdo do projeto GLPI baixado no site oficial. Altere o usuario/grupo dono do diretório para o usuário/grupo do container php:fpm-alpine (www-data:www-data uid=82 gui=82). Para testar os containers com outras versões do GLPI substitua o conteúdo desta pasta com os arquivos da versão do GLPI desejada.
-
-### Testado em:
-- Debian GNU/Linux 11 com Docker 20.10.5+dfsg1 e cluster swarm iniciado
-
 
 ### Histórico
 
@@ -34,6 +65,12 @@ v1.0 26/07/2022, Emanuel Dramos:
 - Build da imagem e push para o Dockerhub
 - Push do projeto para o github
 - Deploy da aplicação e teste de conexão com o banco de dados
+
+v1.1 18/08/2022, Emanuel Dramos:
+- Atualização do README.md
+- Atualização do arquivo de configuração do nginx - https
+- Atualização do docker-compose
+- Deploy da aplicação
 
 
 ### Autor e mantenedor

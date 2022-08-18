@@ -23,16 +23,23 @@ services:
     - db
     image: dramos777/php-to-glpi:1.0
     volumes:
-    - ./glpi-project:/var/www/html/
+    - ./glpi-project:/var/www/html/glpi/
     networks:
     - network
   web:
     depends_on:
     - db
     - php
-    image: dramos777/nginx-basic-conf-to-php:1.0 
+    image: nginx:alpine 
     volumes:
-    - ./glpi-project:/var/www/html/
+    - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    - ./glpi-project:/var/www/html/glpi/:ro
+    - ./glpi-project/config/:/var/www/html/glpi/config/
+    - ./glpi-project/plugins/:/var/www/html/glpi/plugins/
+    - ./certbot/www/:/var/www/html/certbot/
+    - ./certbot/conf/:/etc/nginx/ssl/
+    - ./certificates/fullchain.pem:/etc/nginx/ssl/live/seudominio.abc/fullchain.pem
+    - ./certificates/privkey.pem:/etc/nginx/ssl/live/seudominio.abc/privkey.pem
     deploy:
       replicas: 1
       resources:
@@ -41,6 +48,13 @@ services:
     ports:
     - "80:80"
     - "443:443" 
+    networks:
+    - network
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+    - ./certbot/www/:/var/www/certbot/:rw
+    - ./certbot/conf/:/etc/letsencrypt/:rw
     networks:
     - network
 networks:
