@@ -20,7 +20,7 @@
 - O diretório *glpi-project* contém o conteúdo do projeto GLPI baixado no site oficial *(https://glpi-project.org)*.
 - Altere o *usuario/grupo* dono do diretório para o *usuário/grupo* do container **php:fpm-alpine** *(www-data:www-data uid=82 gui=82)*.
 - Para testes utilizando outras versões do GLPI substitua o conteúdo da pasta *glpi-project* com os arquivos da versão do GLPI desejada.
-- Altere *example.org,www.example.org e www2.example.org* no arquivo de configuração do nginx (*./nginx/defaul.conf*).
+- Altere *seudominio.abc,www.seudominio.abc e www2.seudominio.abc* no arquivo de configuração do nginx (*./nginx/defaul.conf*).
 
 ### Como usar
 
