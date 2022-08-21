@@ -4,7 +4,7 @@
 
 ### Resumo
 
-- Personalização das configurações do nginx para https e redirecionar http.
+- Personalização das configurações do nginx para uso do https com redirecionamento http.
 - Alteração do container php:fpm-alpine com instalação e configuração dos pacotes básicos necessários para o deploy da GLPI-v10.x com banco de dados mariadb/mysql.
 
 ### Dependências
@@ -19,7 +19,7 @@
 
 - O diretório *glpi-project* contém o conteúdo do projeto GLPI baixado no site oficial *(https://glpi-project.org)*.
 - Para testes utilizando outras versões do GLPI substitua o conteúdo da pasta *glpi-project* com os arquivos da versão do GLPI desejada.
-- Altere *seudominio.abc,www.seudominio.abc e www2.seudominio.abc* nos arquivos de configuração.
+- Altere *seudominio.abc* nos arquivos de configuração.
 
 ### Como usar
 
