@@ -23,7 +23,11 @@ services:
     - db
     image: dramos777/php-to-glpi:1.0
     volumes:
-    - ./glpi-project:/var/www/html/
+    - ./glpi-project:/var/www/html/glpi/:ro
+    - ./glpi-project/config/:/var/www/html/glpi/config/
+    - ./glpi-project/files/:/var/www/html/glpi/files/
+    - ./glpi-project/lib/:/var/www/html/glpi/lib/
+    - ./glpi-project/lib/:/var/www/html/glpi/plugins/
     networks:
     - network
   web:
@@ -32,10 +36,18 @@ services:
     - php
     image: nginx:alpine 
     volumes:
-    - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-    - ./glpi-project:/var/www/html/
+    - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./nginx/conf/nginxconfig.io/:/etc/nginx/nginxconfig.io/:ro
+    - ./nginx/conf/sites-available/:/etc/nginx/sites-available/:ro
+    - ./nginx/conf/sites-enabled/:/etc/nginx/sites-enabled/:ro
     - ./certificates/fullchain.pem:/etc/nginx/ssl/live/seudominio.abc/fullchain.pem:ro
     - ./certificates/privkey.pem:/etc/nginx/ssl/live/seudominio.abc/privkey.pem:ro
+    - ./certificates/dhparam.pem:/etc/nginx/dhparam.pem:ro
+    - ./glpi-project:/var/www/html/glpi/:ro
+    - ./glpi-project/config/:/var/www/html/glpi/config/
+    - ./glpi-project/files/:/var/www/html/glpi/files/
+    - ./glpi-project/lib/:/var/www/html/glpi/lib/
+    - ./glpi-project/lib/:/var/www/html/glpi/plugins/
     deploy:
       replicas: 1
       resources:
