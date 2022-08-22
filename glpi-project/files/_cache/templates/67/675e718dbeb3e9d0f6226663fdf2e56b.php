@@ -148,6 +148,6 @@ class __TwigTemplate_97cc8c2aed16b82bdb72e639dfc14c28 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "layout/parts/head.html.twig", "/var/www/html/templates/layout/parts/head.html.twig");
+        return new Source("", "layout/parts/head.html.twig", "/var/www/html/glpi/templates/layout/parts/head.html.twig");
     }
 }

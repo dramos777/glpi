@@ -119,6 +119,6 @@ class __TwigTemplate_bdfb61800f96547bd8de757d1ed5e536 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "install/step0.html.twig", "/var/www/html/templates/install/step0.html.twig");
+        return new Source("", "install/step0.html.twig", "/var/www/html/glpi/templates/install/step0.html.twig");
     }
 }

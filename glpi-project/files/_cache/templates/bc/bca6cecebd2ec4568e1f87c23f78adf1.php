@@ -88,6 +88,6 @@ class __TwigTemplate_d7c32fa41565ddeca1217bdfe4462d75 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "install/accept_license.html.twig", "/var/www/html/templates/install/accept_license.html.twig");
+        return new Source("", "install/accept_license.html.twig", "/var/www/html/glpi/templates/install/accept_license.html.twig");
     }
 }

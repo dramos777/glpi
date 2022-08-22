@@ -309,6 +309,6 @@ class __TwigTemplate_70404526c2852a65b3598f638736cc1f extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "components/alerts_macros.html.twig", "/var/www/html/templates/components/alerts_macros.html.twig");
+        return new Source("", "components/alerts_macros.html.twig", "/var/www/html/glpi/templates/components/alerts_macros.html.twig");
     }
 }

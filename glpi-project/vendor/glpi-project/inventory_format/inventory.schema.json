@@ -306,6 +306,15 @@
                 "examples": [
                   "8086"
                 ]
+              },
+              "model": {
+                "type": "string",
+                "examples": [
+                  "099GTM"
+                ]
+              },
+              "serial": {
+                "type": "string"
               }
             },
             "additionalProperties": false
@@ -2012,8 +2021,7 @@
           "items": {
             "type": "object",
             "required": [
-              "name",
-              "vmtype"
+              "name"
             ],
             "properties": {
               "image": {
@@ -2066,8 +2074,7 @@
                 "type": "string",
                 "examples": [
                   "libvirt"
-                ],
-                "pattern": "^(physical|xen|virtualbox|virtual machine|vmware|qemu|solaris ?zones?|vserver|openvz|bsdjail|parallels|hyperv|aix_lpar|docker|libvirt|lxd|lxc|virtuozzo|kvm|hpvm|wsl[12])$"
+                ]
               },
               "mac": {
                 "type": "string"

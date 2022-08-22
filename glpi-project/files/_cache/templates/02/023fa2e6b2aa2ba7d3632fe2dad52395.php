@@ -126,6 +126,6 @@ class __TwigTemplate_82aef7216bbbd5cb3060ca8db37a3e30 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "layout/parts/page_footer.html.twig", "/var/www/html/templates/layout/parts/page_footer.html.twig");
+        return new Source("", "layout/parts/page_footer.html.twig", "/var/www/html/glpi/templates/layout/parts/page_footer.html.twig");
     }
 }

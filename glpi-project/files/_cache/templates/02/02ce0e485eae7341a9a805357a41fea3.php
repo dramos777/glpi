@@ -69,6 +69,6 @@ class __TwigTemplate_510978d5ccef2b38de92e941718bfb70 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "display_and_die.html.twig", "/var/www/html/templates/display_and_die.html.twig");
+        return new Source("", "display_and_die.html.twig", "/var/www/html/glpi/templates/display_and_die.html.twig");
     }
 }

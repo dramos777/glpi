@@ -8,8 +8,8 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.8"
-          memory: 800M
+          cpus: "1"
+          memory: 1024M
     environment:
       MYSQL_ROOT_PASSWORD: glpi
       MYSQL_ROOT_HOST: localhost
@@ -23,21 +23,36 @@ services:
     - db
     image: dramos777/php-to-glpi:1.0
     volumes:
-    - ./glpi-project:/var/www/html/
+    - ./glpi-project:/var/www/html/glpi/:ro
+    - ./glpi-project/config/:/var/www/html/glpi/config/
+    - ./glpi-project/files/:/var/www/html/glpi/files/
+    - ./glpi-project/lib/:/var/www/html/glpi/lib/
+    - ./glpi-project/lib/:/var/www/html/glpi/plugins/
     networks:
     - network
   web:
     depends_on:
     - db
     - php
-    image: dramos777/nginx-basic-conf-to-php:1.0 
+    image: nginx:alpine 
     volumes:
-    - ./glpi-project:/var/www/html/
+    - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./nginx/conf/nginxconfig.io/:/etc/nginx/nginxconfig.io/:ro
+    - ./nginx/conf/sites-available/:/etc/nginx/sites-available/:ro
+    - ./nginx/conf/sites-enabled/:/etc/nginx/sites-enabled/:ro
+    - ./certificates/fullchain.pem:/etc/nginx/ssl/live/seudominio.abc/fullchain.pem:ro
+    - ./certificates/privkey.pem:/etc/nginx/ssl/live/seudominio.abc/privkey.pem:ro
+    - ./certificates/dhparam.pem:/etc/nginx/dhparam.pem:ro
+    - ./glpi-project:/var/www/html/glpi/:ro
+    - ./glpi-project/config/:/var/www/html/glpi/config/
+    - ./glpi-project/files/:/var/www/html/glpi/files/
+    - ./glpi-project/lib/:/var/www/html/glpi/lib/
+    - ./glpi-project/lib/:/var/www/html/glpi/plugins/
     deploy:
       replicas: 1
       resources:
         limits:
-          cpus: "0.8"
+          cpus: "1"
     ports:
     - "80:80"
     - "443:443" 

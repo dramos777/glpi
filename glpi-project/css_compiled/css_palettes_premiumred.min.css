@@ -23152,9 +23152,12 @@ table.deleted-results > :not(caption) > * > * {
   top: 0 !important;
   bottom: 0 !important;
 }
-.qtip-bootstrap {
+.qtip-bootstrap, .popover .popover-body {
   background-color: #fafbfc;
   color: #1e293b;
+}
+.popover .popover-arrow::after {
+  border-top-color: #fafbfc;
 }
 kbd {
   white-space: nowrap;
@@ -25024,6 +25027,7 @@ body .flatpickr-time input:hover, body .flatpickr-time .flatpickr-am-pm:hover, b
   height: calc(100% - (1.2em + 35px));
   overflow-y: auto;
   overflow-x: hidden;
+  list-style: none;
 }
 .kanban .kanban-container .kanban-columns .kanban-column .kanban-body .kanban-add-form {
   padding-top: 10px !important;

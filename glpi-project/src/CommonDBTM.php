@@ -1183,6 +1183,13 @@ class CommonDBTM extends CommonGLPI
             $this->input = $saved;
 
             foreach ($saved as $name => $value) {
+                if (
+                    $this instanceof CommonITILObject
+                    && $name === 'status'
+                    && !CommonITILObject::isAllowedStatus($this->fields[$name], $value)
+                ) {
+                    continue;
+                }
                 if (isset($this->fields[$name])) {
                     $this->fields[$name] = $saved[$name];
                 }
@@ -2933,7 +2940,10 @@ class CommonDBTM extends CommonGLPI
             if (!$this->can($ID, $right, $input)) {
                // Gestion timeout session
                 Session::redirectIfNotLoggedIn();
-                Html::displayRightError();
+                $right_name = Session::getRightNameForError($right);
+                $itemtype = static::getType();
+                $info = "User failed a can* method check for right $right ($right_name) on item Type: $itemtype ID: $ID";
+                Html::displayRightError($info);
             }
         }
     }
@@ -2978,7 +2988,10 @@ class CommonDBTM extends CommonGLPI
         if (!$this->canGlobal($right)) {
            // Gestion timeout session
             Session::redirectIfNotLoggedIn();
-            Html::displayRightError();
+            $right_name = Session::getRightNameForError($right);
+            $itemtype = static::getType();
+            $info = "User failed a global can* method check for right $right ($right_name) on item Type: $itemtype";
+            Html::displayRightError($info);
         }
     }
 
@@ -6417,5 +6430,23 @@ class CommonDBTM extends CommonGLPI
             $alert = new Alert();
             $alert->deleteByCriteria($input, 1);
         }
+    }
+
+    public function isGlobal(): bool
+    {
+        if (!$this->isField('is_global')) {
+            return false;
+        }
+
+        $confname = strtolower($this->gettype()) . 's_management_restrict';
+        if (\Config::getConfigurationValue('core', $confname) == Config::GLOBAL_MANAGEMENT) {
+            $is_global = true;
+        } else if (\Config::getConfigurationValue('core', $confname) == Config::UNIT_MANAGEMENT) {
+            $is_global = false;
+        } else {
+            $is_global = ($this->fields['is_global'] ?? false) == 1;
+        }
+
+        return $is_global;
     }
 }

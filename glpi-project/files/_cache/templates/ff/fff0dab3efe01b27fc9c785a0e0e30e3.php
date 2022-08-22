@@ -36,12 +36,25 @@ class __TwigTemplate_4f2caec88be3095eca3e676d75a1b7b8 extends Template
         // line 33
         echo "
 <body class=\"horizontal-layout\">
-   <div class=\"page\">
+   ";
+        // line 35
+        if ((twig_constant_is_defined("SKIP_UPDATES") && ($this->extensions['Glpi\Application\View\Extension\PhpExtension']->call("Update::isDbUpToDate") == false))) {
+            // line 36
+            echo "      <div class=\"banner-need-update\">
+         ";
+            // line 37
+            echo twig_escape_filter($this->env, __("You are bypassing a needed update"), "html", null, true);
+            echo "
+      </div>
+   ";
+        }
+        // line 40
+        echo "   <div class=\"page\">
 
       <header class=\"navbar d-print-none sticky-lg-top shadow-sm topbar\">
          <div class=\"container-fluid\">
             <a href=\"";
-        // line 39
+        // line 44
         echo twig_escape_filter($this->env, $this->extensions['Glpi\Application\View\Extension\RoutingExtension']->indexPath(), "html", null, true);
         echo "\" title=\"";
         echo twig_escape_filter($this->env, __("Home"), "html", null, true);
@@ -69,11 +82,11 @@ class __TwigTemplate_4f2caec88be3095eca3e676d75a1b7b8 extends Template
 
     public function getDebugInfo()
     {
-        return array (  45 => 39,  37 => 33,);
+        return array (  58 => 44,  52 => 40,  46 => 37,  43 => 36,  41 => 35,  37 => 33,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "layout/parts/page_header_empty.html.twig", "/var/www/html/templates/layout/parts/page_header_empty.html.twig");
+        return new Source("", "layout/parts/page_header_empty.html.twig", "/var/www/html/glpi/templates/layout/parts/page_header_empty.html.twig");
     }
 }
