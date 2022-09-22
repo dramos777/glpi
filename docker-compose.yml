@@ -3,7 +3,7 @@ services:
   db:
     image: mariadb:latest
     volumes:
-    - db:/var/lib/mysql
+    - ./var/lib/mysql:/var/lib/mysql
     deploy:
       replicas: 1
       resources:
@@ -60,5 +60,3 @@ services:
     - network
 networks:
   network:
-volumes:
-  db:
