@@ -3,6 +3,8 @@ services:
   db:
     image: mariadb:latest
     volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/timezone:/etc/timezone:ro
     - ./var/lib/mysql:/var/lib/mysql
     deploy:
       replicas: 1
@@ -10,12 +12,12 @@ services:
         limits:
           cpus: "1"
           memory: 1024M
-    environment:
-      MYSQL_ROOT_PASSWORD: glpi
-      MYSQL_ROOT_HOST: localhost
-      MYSQL_DATABASE: glpi
-      MYSQL_USER: glpi
-      MYSQL_PASSWORD: glpi
+    env_file:
+    - ./env_vars/.env_db_mysql
+    secrets:
+    - MYSQL_USER
+    - MYSQL_PASSWORD
+    - MYSQL_ROOT_PASSWORD
     networks:
     - network
   php:
@@ -23,6 +25,8 @@ services:
     - db
     image: dramos777/php-to-glpi:1.0
     volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/timezone:/etc/timezone:ro
     - ./glpi-project:/var/www/html/glpi/:ro
     - ./glpi-project/config/:/var/www/html/glpi/config/
     - ./glpi-project/files/:/var/www/html/glpi/files/
@@ -36,6 +40,8 @@ services:
     - php
     image: nginx:alpine 
     volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/timezone:/etc/timezone:ro
     - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
     - ./nginx/conf/nginxconfig.io/:/etc/nginx/nginxconfig.io/:ro
     - ./nginx/conf/sites-available/:/etc/nginx/sites-available/:ro
@@ -60,3 +66,12 @@ services:
     - network
 networks:
   network:
+secrets:
+  MYSQL_USER:
+    file: ./env_vars/.MYSQL_USER
+  MYSQL_PASSWORD:
+    file: ./env_vars/.MYSQL_PASSWORD
+  MYSQL_ROOT_USER:
+    file: ./env_vars/.MYSQL_ROOT_USER
+  MYSQL_ROOT_PASSWORD:
+    file: ./env_vars/.MYSQL_ROOT_PASSWORD
