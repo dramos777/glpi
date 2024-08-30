@@ -5,7 +5,7 @@ services:
     volumes:
     - /etc/localtime:/etc/localtime:ro
     - /etc/timezone:/etc/timezone:ro
-    - ./var/lib/mysql:/var/lib/mysql
+    - mariadb-glpi-data-01:/var/lib/mysql
     deploy:
       replicas: 1
       resources:
@@ -28,12 +28,17 @@ services:
     - /etc/localtime:/etc/localtime:ro
     - /etc/timezone:/etc/timezone:ro
     - ./glpi-project:/var/www/html/glpi/:ro
-    - ./glpi-project/config/:/var/www/html/glpi/config/
-    - ./glpi-project/files/:/var/www/html/glpi/files/
-    - ./glpi-project/lib/:/var/www/html/glpi/lib/
-    - ./glpi-project/lib/:/var/www/html/glpi/plugins/
+    - ./glpi-project/config/:/var/www/html/glpi/config/:rw
+    - ./glpi-project/files/:/var/www/html/glpi/files/:rw
+    - ./glpi-project/lib/:/var/www/html/glpi/lib/:rw
+    - ./glpi-project/lib/:/var/www/html/glpi/plugins/:rw
     networks:
     - network
+  certbot:
+    image: certbot/certbot
+    volumes:
+    - ./glpi-project:/var/www/html/glpi/:rw
+    - ./certificates/:/etc/letsencrypt/:rw
   web:
     depends_on:
     - db
@@ -42,12 +47,11 @@ services:
     volumes:
     - /etc/localtime:/etc/localtime:ro
     - /etc/timezone:/etc/timezone:ro
-    - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
-    - ./nginx/conf/nginxconfig.io/:/etc/nginx/nginxconfig.io/:ro
-    - ./nginx/conf/sites-available/:/etc/nginx/sites-available/:ro
-    - ./nginx/conf/sites-enabled/:/etc/nginx/sites-enabled/:ro
-    - ./certificates/fullchain.pem:/etc/nginx/ssl/live/seudominio.abc/fullchain.pem:ro
-    - ./certificates/privkey.pem:/etc/nginx/ssl/live/seudominio.abc/privkey.pem:ro
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./nginx/nginxconfig.io/:/etc/nginx/nginxconfig.io/:ro
+    - ./nginx/sites-available/:/etc/nginx/sites-available/:ro
+    - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/:ro
+    - ./certificates/:/etc/nginx/ssl/live/:ro
     - ./certificates/dhparam.pem:/etc/nginx/dhparam.pem:ro
     - ./glpi-project:/var/www/html/glpi/:ro
     - ./glpi-project/config/:/var/www/html/glpi/config/
@@ -66,6 +70,8 @@ services:
     - network
 networks:
   network:
+volumes:
+- mariadb-glpi-data-01:
 secrets:
   MYSQL_USER:
     file: ./env_vars/.MYSQL_USER
