@@ -1,0 +1,20 @@
+CERTIFICADOS:
+	#- Renomear o local de armazenamento dos certificados
+- Adicionar opções de configuração dos certificados:
+  - Letsencrypt
+  - Openssl
+  - Own certificate (orientar a renomear os aquivos)
+- Acrescentar opção de habilitar WAF no deploy
+- Acrescentar WAF no docker-compose.yaml
+- Transformar docker-compose em template
+- Criar função para gerar docker-compose.yaml com/sem letsencrypt
+- Criar função para gerar docker-compose.yaml com/sem WAF
+- Configurar variáveis de ambiente
+- Baixar o glpi-project
+- Atualizar usuário e permissões nos containers
+- Adicionar função - Criar estrutura de diretórios
+- Adicionar opção de renomear o domíno nos arquivos e nas configurações
+- Criar link simbolico de sites-availables para sites-enables
+- Criar a infra-estrutura
+- Configuração cron com atualização automática no letsencrypt
+- Atualizar o README.md
