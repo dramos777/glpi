@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #Create files.pem needed for webserver
 
-CERTDIR="./certificates/"
+CERTDIR="./certs/"
 KEYNAME="privkey.pem"
 CERTNAME="fullchain.pem"
 VALID="1095"

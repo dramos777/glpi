@@ -38,7 +38,7 @@ services:
     image: certbot/certbot
     volumes:
     - ./glpi-project:/var/www/html/glpi/:rw
-    - ./certificates/:/etc/letsencrypt/:rw
+    - ./certs/:/etc/letsencrypt/:rw
   web:
     depends_on:
     - db
@@ -51,8 +51,7 @@ services:
     - ./nginx/nginxconfig.io/:/etc/nginx/nginxconfig.io/:ro
     - ./nginx/sites-available/:/etc/nginx/sites-available/:ro
     - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/:ro
-    - ./certificates/:/etc/nginx/ssl/live/:ro
-    - ./certificates/dhparam.pem:/etc/nginx/dhparam.pem:ro
+    - ./certs/:/etc/nginx/certs/:ro
     - ./glpi-project:/var/www/html/glpi/:ro
     - ./glpi-project/config/:/var/www/html/glpi/config/
     - ./glpi-project/files/:/var/www/html/glpi/files/

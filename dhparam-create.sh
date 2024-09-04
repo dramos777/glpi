@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #Create files.pem needed for webserver
 
-CERTDIR="./certificates/"
+CERTDIR="./certs/"
 DHNAME="dhparam.pem"
 
 # Create dhparam
