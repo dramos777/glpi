@@ -7,8 +7,20 @@ CERTNAME="fullchain.pem"
 VALID="1095"
 DHNAME="dhparam.pem"
 
+_COMMAND=wget
 
-#Create Certificates function
+# Check if wget is installed
+check_wget_install() {
+    local _command=$_COMMAND
+
+    if command -v "$_command" > /dev/null 2>&1; then
+        continue
+    else
+        echo "$_command is not installed. Please install $_command and try again."
+    fi
+}
+
+# Create Certificates function
 cert_create() {
 	echo "Genereting certifictes using openssl..."
 	openssl req -newkey rsa:4096 -nodes -keyout "$CERTDIR$KEYNAME" -x509 -days "$VALID" -out "$CERTDIR$CERTNAME"
@@ -31,6 +43,34 @@ letsencrypt_create() {
 
 }
 
+# Function to create infra with others certificates files from user
+use_own_cert(){
+	echo "Please ensure files $CERTNAME and $KEYNAME is in $CERTDIR before continue."
+	echo "
+	Do files $CERTNAME and $KEYNAME is in $CERTDIR? yes/no 
+	"	
+	read -r test_cert
+
+	# Test if yes was selected
+	if [ $test_cert = yes ]; then
+
+		# Check if fullchain.pem exits
+            if [ -f "${CERTDIR}${$CERTNAME}" ]; then
+	        continue 
+	    else
+	        echo "File $CERTNAME not found." && exit 1
+            fi
+
+		# Check if privkey.pem exits
+            if [ -f "${CERTDIR}${KEYNAME}" ]; then
+	        continue
+	    else
+	        echo "File $KEYNAME not found." && exit 1
+	    fi
+
+	fi
+}
+
 # Interactive mode
 echo "
 	How will be the certificate configuration?
@@ -47,17 +87,16 @@ case $option in
     1) dhparam_create \
 	   && sleep 3 \
 	   && echo "" \
-	   && letsencrypt_create \
-	   && exit 0 ;;
+	   && letsencrypt_create ;;
 
     2) cert_create \
 	    && sleep 3 \
 	    && echo "" \
-	    && dhparam_create \
-	    && exit 0 ;;
+	    && dhparam_create ;;
 
-    3) echo "This is option 3" ;;
-     *) echo "This is any other option" && exit 1 ;;
+    3) use_own_cert \
+	    && dhparam_create ;;
+     *) echo "This option is not available!" && exit 1 ;;
 esac
 
 
